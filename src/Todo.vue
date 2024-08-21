@@ -1,4 +1,5 @@
 <template>
+    <Button>Hello</Button>
     <form action="" @submit.prevent="addTodos">
         <fieldset role="group">
             <input type="text" placeholder="Entrer votre tâche" v-model="newTodo">
@@ -13,10 +14,20 @@
                 :key="todo.date"
                 :class="{completed : todo.completed}"
             >
-                <label>
+                <!-- <label>
                     <input type="checkbox" v-model="todo.completed">
                     {{ todo.title }}
-                </label>
+                </label> -->
+                <!-- <Checkbox
+                    :label="todo.title"
+                    @check="console.log('coché')"
+                    @uncheck="console.log('décoché')"
+                /> -->
+
+                <Checkbox
+                    :label="todo.title"
+                    v-model="todo.completed"
+                />
             </li>
         </ul>
 
@@ -30,10 +41,15 @@
         </p>
     </div>
 
+    <Checkbox label="Bonjour"/>
+
 </template>
 
 <script setup>
     import {computed, ref} from 'vue'
+    import Checkbox from './Checkbox.vue'
+    import Button from './Button.vue'
+
     const todos = ref([
         { "title": "Acheter la propriété 'Rue de la Paix'", "completed": false, "date": 20240730 },
         { "title": "Construire un hôtel sur 'Avenue Foch'", "completed": true, "date": 20240730 },
