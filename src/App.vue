@@ -1,13 +1,13 @@
 <!-- Gére les templates HTML (modèle) -->
 <template>
-    <p :id="`count-${count}`" :style="{color : count >= 5 ? 'red' : 'green'}" :class="{active: count > 5 }" >Compteur : {{ count }}</p>
+    <!-- <p :id="`count-${count}`" :style="{color : count >= 5 ? 'red' : 'green'}" :class="{active: count > 5 }" >Compteur : {{ count }}</p>
     <div v-if="count >= 5">Vous avez cliquer plus de 5 fois</div>
     <div v-else>Vous avez cliquer moins de 5 fois</div>
     <button @click="increment">Incrément</button>
-    <button @click="decrement">Décrément</button>
+    <button @click="decrement">Décrément</button> -->
 
     <!-- Boucle avec Vue -->
-    <hr/>
+    <!-- <hr/>
     <button @click="sortMovies">Réorganiser</button>
 
     <form action="" @submit.prevent="addMovie">
@@ -18,7 +18,15 @@
         <li v-for="movie in movies" :key="movie">
             {{ movie }} <button @click="deleteMovie(movie)">Sup</button>
         </li>
+    </ul> -->
+
+    <ul>
+        <li>{{ person.firstname }}</li>
+        <li>{{ person.lastname }}</li>
+        <li>{{ person.age }}</li>
     </ul>
+
+    <button @click.prevent="changeAge">Changer l'age</button>
 
 </template>
 
@@ -26,40 +34,51 @@
 <script setup>
 import { ref } from 'vue';
 
-const count = ref(0)
+const person = ref({
+    firstname : 'Koto',
+    lastname : 'Jean',
+    age : 20
+})
 
-const increment = ()=> {
-    count.value ++
+const changeAge = () => {
+    person.value.age = Math.round(Math.random() * 100)
 }
 
-const decrement = ()=> {
-    count.value --
-}
 
-// Tableau :
-const movies = ref([
-    'Matrix',
-    'Lilo & Stich',
-    'Avengers'
-])
+// const count = ref(0)
 
-const deleteMovie = (movie) => {
-    movies.value = movies.value.filter(m => m !== movie)
-}
+// const increment = ()=> {
+//     count.value ++
+// }
 
-const sortMovies = () => {
-    // movies.value = movies.value.sort()
-    movies.value.sort((a,b) => a > b ? 1 : -1)
-}
+// const decrement = ()=> {
+//     count.value --
+// }
 
-// Submit :
-const movieName = ref('')
+// // Tableau :
+// const movies = ref([
+//     'Matrix',
+//     'Lilo & Stich',
+//     'Avengers'
+// ])
 
-const addMovie = () => {
-    movies.value.push(movieName.value)
-    // vider le champ :
-    movieName.value = ""
-}
+// const deleteMovie = (movie) => {
+//     movies.value = movies.value.filter(m => m !== movie)
+// }
+
+// const sortMovies = () => {
+//     // movies.value = movies.value.sort()
+//     movies.value.sort((a,b) => a > b ? 1 : -1)
+// }
+
+// // Submit :
+// const movieName = ref('')
+
+// const addMovie = () => {
+//     movies.value.push(movieName.value)
+//     // vider le champ :
+//     movieName.value = ""
+// }
 
 </script>
 
