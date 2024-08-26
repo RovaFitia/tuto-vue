@@ -1,8 +1,12 @@
 <template>
-    <Layout>
-        <!-- <template #header>
+
+    <button @click="showTimer = !showTimer">Afficher / Masquer</button>
+    <Timer v-if="showTimer"/>
+
+    <!-- <Layout>
+        <template #header>
             En tête
-        </template> -->
+        </template>
 
         <template #aside>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id aliquid ea animi deserunt incidunt ratione similique sunt est consectetur itaque exercitationem illum tempora, enim repellendus explicabo numquam? Minus, ipsam! Consequatur!
@@ -15,7 +19,7 @@
         <template #footer>
             Pied de page
         </template>
-    </Layout>
+    </Layout> -->
     <!-- <Button>Hello</Button> -->
     <form action="" @submit.prevent="addTodos">
         <fieldset role="group">
@@ -63,18 +67,22 @@
 </template>
 
 <script setup>
-    import {computed, ref} from 'vue'
+    import {computed, onMounted, ref} from 'vue'
     import Checkbox from './Checkbox.vue'
     import Button from './Button.vue'
     import Layout from './Layout.vue'
+    import Timer from './Timer.vue';
 
-    const todos = ref([
-        { "title": "Acheter la propriété 'Rue de la Paix'", "completed": false, "date": 20240730 },
-        { "title": "Construire un hôtel sur 'Avenue Foch'", "completed": true, "date": 20240730 },
-        { "title": "Éviter la case prison", "completed": false, "date": 20240730 }
-    ])
+    const todos = ref([])
     const newTodo = ref('')
     const hideTodo = ref(false)
+    const showTimer = ref(true)
+
+    onMounted(()=> {
+        fetch('https://jsonplaceholder.typicode.com/todos')
+        .then(r => r.json())
+        .then(v => todos.value = v.map(todo => ({ ...todo, date: todo.id})))
+    })
 
     const addTodos = () => {
         todos.value.push({
