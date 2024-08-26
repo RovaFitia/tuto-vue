@@ -1,5 +1,22 @@
 <template>
-    <Button>Hello</Button>
+    <Layout>
+        <!-- <template #header>
+            En tête
+        </template> -->
+
+        <template #aside>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id aliquid ea animi deserunt incidunt ratione similique sunt est consectetur itaque exercitationem illum tempora, enim repellendus explicabo numquam? Minus, ipsam! Consequatur!
+        </template>
+
+        <template #main>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi minima explicabo expedita inventore harum voluptatem officia quidem, veritatis ab natus! Aliquid delectus beatae temporibus, repellat ratione ullam ea quas deserunt.
+        </template>
+
+        <template #footer>
+            Pied de page
+        </template>
+    </Layout>
+    <!-- <Button>Hello</Button> -->
     <form action="" @submit.prevent="addTodos">
         <fieldset role="group">
             <input type="text" placeholder="Entrer votre tâche" v-model="newTodo">
@@ -49,6 +66,7 @@
     import {computed, ref} from 'vue'
     import Checkbox from './Checkbox.vue'
     import Button from './Button.vue'
+    import Layout from './Layout.vue'
 
     const todos = ref([
         { "title": "Acheter la propriété 'Rue de la Paix'", "completed": false, "date": 20240730 },
